@@ -33,7 +33,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-text-chatgpt",
+  "name": "gpt-type-effect",
   "author": "Nischal Dahal <neeswebservice@gmail.com> (https://nischal-dahal.com.np)",
   "module": "dist/react-chatgpt-text.esm.js",
   "size-limit": [
