@@ -110,7 +110,7 @@ const TextEffect: FC<Props> = ({
 
   const caretStyle: React.CSSProperties = {
     display: 'inline-block',
-    width: '10',
+    width: '10px',
     height: '17px',
     backgroundColor: '#333',
     animation: `${blinkCaret} 0.75s step-end infinite`,
