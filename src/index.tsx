@@ -1,21 +1,14 @@
 import React, { FC } from 'react';
 
-const blinkCaret = `
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-`;
-
 interface Props {
   message: string;
   thinkingDelay?: number;
   minTypingDelay?: number;
   maxTypingDelay?: number;
-  className?: string;
+  textClassName?: string;
+  styles?: React.CSSProperties | undefined;
   caretBackground?: string;
+  cursorBlinkSpeed?: number;
   notDisplayCaretAfterFinishes?: boolean;
 }
 
@@ -24,8 +17,10 @@ const TextEffect: FC<Props> = ({
   thinkingDelay = 2000,
   minTypingDelay = 50,
   maxTypingDelay = 400,
-  className,
-  caretBackground,
+  textClassName,
+  styles,
+  caretBackground = '#333',
+  cursorBlinkSpeed = 1000,
   notDisplayCaretAfterFinishes,
 }) => {
   const [words, setWords] = React.useState<string[]>([]);
@@ -33,16 +28,36 @@ const TextEffect: FC<Props> = ({
   const [displayText, setDisplayText] = React.useState<string>('');
   const [thinking, setThinking] = React.useState<boolean>(true);
   const [finish, setFinish] = React.useState<boolean>(false);
+  const [opacity, setOpacity] = React.useState<number>(1);
+
+  React.useEffect(() => {
+    const animate = () => {
+      setOpacity(0);
+
+      setTimeout(() => {
+        setOpacity(1);
+      }, 500);
+    };
+
+    const interval = setInterval(animate, cursorBlinkSpeed);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [cursorBlinkSpeed]);
 
   React.useEffect(() => {
     const wordsArray = message.split(' ');
+
     setWords(wordsArray);
   }, [message]);
 
   React.useEffect(() => {
     if (index < words.length) {
       const word = words[index];
+
       const wordLength = word.length;
+
       let typingDelay = Math.floor(
         Math.random() * (maxTypingDelay - minTypingDelay) + minTypingDelay
       );
@@ -55,7 +70,9 @@ const TextEffect: FC<Props> = ({
 
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + word + ' ');
+
         setIndex(prev => prev + 1);
+
         setThinking(false);
       }, typingDelay);
 
@@ -69,6 +86,7 @@ const TextEffect: FC<Props> = ({
     if (words.length === index + 1) {
       setFinish(true);
     }
+
     return () => {};
   }, [words, index]);
 
@@ -79,20 +97,26 @@ const TextEffect: FC<Props> = ({
   React.useEffect(() => {
     if (index === 0) {
       const timeout = setTimeout(handleThinkingTimeout, thinkingDelay);
+
       return () => clearTimeout(timeout);
     }
+
     if (index < words.length) {
       const timeout = setTimeout(handleThinkingTimeout, thinkingDelay);
+
       return () => clearTimeout(timeout);
     }
+
     return () => {};
   }, [index, words, thinkingDelay, handleThinkingTimeout]);
 
   React.useEffect(() => {
     if (thinking) {
       const timeout = setTimeout(handleThinkingTimeout, thinkingDelay);
+
       return () => clearTimeout(timeout);
     }
+
     return () => {};
   }, [thinking, thinkingDelay, handleThinkingTimeout]);
 
@@ -103,29 +127,27 @@ const TextEffect: FC<Props> = ({
   React.useEffect(() => {
     if (!thinking && index < words.length) {
       const timeout = setTimeout(handleSetThinkingTimeout, thinkingDelay);
+
       return () => clearTimeout(timeout);
     }
+
     return () => {};
   }, [thinking, thinkingDelay, index, words, handleSetThinkingTimeout]);
 
-  const caretStyle: React.CSSProperties = {
-    display: 'inline-block',
-    width: '10px',
-    height: '17px',
-    backgroundColor: '#333',
-    animation: `${blinkCaret} 0.75s step-end infinite`,
-    transform: 'translateY(3px)',
-  };
-
   return (
     <div>
-      <span className={className}>{displayText}</span>
+      <span className={textClassName} style={{ ...styles }}>
+        {displayText}
+      </span>
       <span
         style={{
-          ...caretStyle,
+          width: '10px',
+          height: '17px',
           background: caretBackground,
+          transform: 'translateY(3px)',
           display:
             notDisplayCaretAfterFinishes && finish ? 'none' : 'inline-block',
+          opacity: opacity,
         }}
       ></span>
     </div>
