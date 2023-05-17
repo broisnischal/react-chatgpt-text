@@ -36,6 +36,7 @@
   "name": "gpt-type-effect",
   "author": "Nischal Dahal <neeswebservice@gmail.com> (https://nischal-dahal.com.np)",
   "module": "dist/react-chatgpt-text.esm.js",
+  "description": "A typewriter, which generates the type effect like the ChatGPT website's like AI typing, with thinking. Here are lots of features that you can use, ie. thinking delay, typing delay, minimum typing delay, maximum typing delay. ",
   "size-limit": [
     {
       "path": "dist/react-chatgpt-text.cjs.production.min.js",

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 interface Props {
-  message: string;
+  text: string;
   thinkingDelay?: number;
   minTypingDelay?: number;
   maxTypingDelay?: number;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const TextEffect: FC<Props> = ({
-  message,
+  text,
   thinkingDelay = 2000,
   minTypingDelay = 50,
   maxTypingDelay = 400,
@@ -47,10 +47,10 @@ const TextEffect: FC<Props> = ({
   }, [cursorBlinkSpeed]);
 
   React.useEffect(() => {
-    const wordsArray = message.split(' ');
+    const wordsArray = text.split(' ');
 
     setWords(wordsArray);
-  }, [message]);
+  }, [text]);
 
   React.useEffect(() => {
     if (index < words.length) {
