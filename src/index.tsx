@@ -124,7 +124,8 @@ const TextEffect: FC<Props> = ({
         style={{
           ...caretStyle,
           background: caretBackground,
-          display: notDisplayCaretAfterFinishes && finish ? 'none' : '',
+          display:
+            notDisplayCaretAfterFinishes && finish ? 'none' : 'inline-block',
         }}
       ></span>
     </div>
