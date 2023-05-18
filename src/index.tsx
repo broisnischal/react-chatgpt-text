@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 
 interface Props {
   text: string;
@@ -29,6 +29,7 @@ const TextEffect: FC<Props> = ({
   const [thinking, setThinking] = React.useState<boolean>(true);
   const [finish, setFinish] = React.useState<boolean>(false);
   const [opacity, setOpacity] = React.useState<number>(1);
+  let translateYPercentage = 10;
 
   React.useEffect(() => {
     const animate = () => {
@@ -134,6 +135,12 @@ const TextEffect: FC<Props> = ({
     return () => {};
   }, [thinking, thinkingDelay, index, words, handleSetThinkingTimeout]);
 
+  const height = styles?.height;
+  const parsedHeight = parseInt(String(height), 10);
+  const translateY = Number.isNaN(parsedHeight)
+    ? 3
+    : parsedHeight * (translateYPercentage / 100);
+
   return (
     <div>
       <span style={{ ...styles }} className={textClassName}>
@@ -144,7 +151,9 @@ const TextEffect: FC<Props> = ({
           width: `${
             styles?.fontSize
               ? Number(
-                  Number(parseInt(String(styles?.fontSize), 10) / 5).toFixed(0)
+                  Number(
+                    parseInt(String(styles?.fontSize), 10) * (1 - 0.5) // 0.1 represents 10%
+                  ).toFixed(0)
                 ) + 'px'
               : '10px'
           }`,
@@ -152,15 +161,13 @@ const TextEffect: FC<Props> = ({
             styles?.fontSize
               ? Number(
                   Number(
-                    parseInt(String(styles?.fontSize), 10) -
-                      parseInt(String(styles?.fontSize), 10) / 3
+                    parseInt(String(styles?.fontSize), 10) * (1 - 0.1) // 0.1 represents 10% for fontSize
                   ).toFixed(0)
                 ) + 'px'
               : '17px'
-            // parseInt(String(styles?.fontSize), 10) - 5 + "px" || "16px"
           }`,
           background: caretBackground,
-          transform: 'translateY(3px)',
+          transform: `translateY(${translateY}px)`,
           display:
             notDisplayCaretAfterFinishes && finish ? 'none' : 'inline-block',
           opacity: opacity,
