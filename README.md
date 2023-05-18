@@ -11,7 +11,11 @@
 ## Installl
 
 ```sh
-npm install react-chatgpt-text
+npm i gpt-type-effect
+```
+
+```sh
+yarn add gpt-type-effect
 ```
 
 ![demo image](https://res.cloudinary.com/dacp0r5b7/image/upload/v1684305616/final_vy4aep.gif)
