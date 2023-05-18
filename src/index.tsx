@@ -19,14 +19,14 @@ interface Props {
  * @param {string} text - Text to pass
  * @param {number} thinkingDelay - Thinking time delay - default is 4000ms
  * @param {number} minTypingDelay - Minimum typing speed delay - default is 50ms
- * @param {number} maxTypingDelay - Maximum typing speed delay - default is 250ms
- * @param {number} cursorBlinkSpeed - Cursor blink speed - default is 250ms
+ * @param {number} maxTypingDelay - Maximum typing speed delay - default is 230ms
+ * @param {number} cursorBlinkSpeed - Cursor blink speed - default is 1000ms
  */
 const TextEffect: React.FC<Props> = ({
   text,
   thinkingDelay = 4000,
   minTypingDelay = 50,
-  maxTypingDelay = 250,
+  maxTypingDelay = 220,
   textClassName,
   styles,
   caretBackground = '#333',
@@ -70,20 +70,25 @@ const TextEffect: React.FC<Props> = ({
       const wordLength = word.length;
 
       let typingDelay = Math.floor(
-        Math.random() * (maxTypingDelay - minTypingDelay) + minTypingDelay
+        Math.ceil(Math.random() * 1) * (maxTypingDelay - minTypingDelay) +
+          minTypingDelay
       );
 
-      if (wordLength > 10) {
-        typingDelay = Math.floor(typingDelay * 1.5);
-      } else if (wordLength < 5) {
+      if (wordLength > 15) {
+        typingDelay = Math.floor(typingDelay * 3);
+      } else if (wordLength > 10) {
+        typingDelay = Math.floor(typingDelay / 2.5);
+      } else if (wordLength < 8) {
         typingDelay = Math.floor(typingDelay / 2);
+      } else if (wordLength > 8) {
+        typingDelay = Math.floor(typingDelay / 1.5);
+      } else if (wordLength < 5) {
+        typingDelay = Math.floor(typingDelay / 0.1);
       }
 
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + word + ' ');
-
         setIndex(prev => prev + 1);
-
         setThinking(false);
       }, typingDelay);
 
@@ -108,7 +113,6 @@ const TextEffect: React.FC<Props> = ({
   React.useEffect(() => {
     if (index === 0) {
       const timeout = setTimeout(handleThinkingTimeout, thinkingDelay);
-
       return () => clearTimeout(timeout);
     }
 
