@@ -19,14 +19,14 @@ interface Props {
  * @param {string} text - Text to pass
  * @param {number} thinkingDelay - Thinking time delay - default is 4000ms
  * @param {number} minTypingDelay - Minimum typing speed delay - default is 50ms
- * @param {number} maxTypingDelay - Maximum typing speed delay - default is 230ms
+ * @param {number} maxTypingDelay - Maximum typing speed delay - default is 100ms
  * @param {number} cursorBlinkSpeed - Cursor blink speed - default is 1000ms
  */
 const TextEffect: React.FC<Props> = ({
   text,
   thinkingDelay = 4000,
   minTypingDelay = 50,
-  maxTypingDelay = 220,
+  maxTypingDelay = 100,
   textClassName,
   styles,
   caretBackground = '#333',
@@ -85,6 +85,7 @@ const TextEffect: React.FC<Props> = ({
       } else if (wordLength < 5) {
         typingDelay = Math.floor(typingDelay / 0.1);
       }
+      typingDelay += thinkingDelay * 0.01;
 
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + word + ' ');
@@ -96,7 +97,7 @@ const TextEffect: React.FC<Props> = ({
     }
 
     return () => {};
-  }, [index, words, maxTypingDelay, minTypingDelay]);
+  }, [index, words, thinkingDelay, maxTypingDelay, minTypingDelay]);
 
   React.useEffect(() => {
     if (words.length === index + 1) {
