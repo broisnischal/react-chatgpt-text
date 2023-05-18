@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 interface Props {
   text: string;
@@ -22,7 +22,7 @@ interface Props {
  * @param {number} maxTypingDelay - Maximum typing speed delay - default is 250ms
  * @param {number} cursorBlinkSpeed - Cursor blink speed - default is 250ms
  */
-const TextEffect: FC<Props> = ({
+const TextEffect: React.FC<Props> = ({
   text,
   thinkingDelay = 4000,
   minTypingDelay = 50,
@@ -39,7 +39,7 @@ const TextEffect: FC<Props> = ({
   const [thinking, setThinking] = React.useState<boolean>(true);
   const [finish, setFinish] = React.useState<boolean>(false);
   const [opacity, setOpacity] = React.useState<number>(1);
-  let translateYPercentage = 10;
+  let translateYPercentage = 11;
 
   React.useEffect(() => {
     const animate = () => {
@@ -152,17 +152,17 @@ const TextEffect: FC<Props> = ({
     : parsedHeight * (translateYPercentage / 100);
 
   return (
-    <div>
+    <>
       <span style={{ ...styles }} className={textClassName}>
         {displayText}
       </span>
-      <div
+      <span
         style={{
           width: `${
             styles?.fontSize
               ? Number(
                   Number(
-                    parseInt(String(styles?.fontSize), 10) * (1 - 0.5) // 0.1 represents 10%
+                    parseInt(String(styles?.fontSize), 10) * (1 - 0.5)
                   ).toFixed(0)
                 ) + 'px'
               : '10px'
@@ -171,7 +171,7 @@ const TextEffect: FC<Props> = ({
             styles?.fontSize
               ? Number(
                   Number(
-                    parseInt(String(styles?.fontSize), 10) * (1 - 0.1) // 0.1 represents 10% for fontSize
+                    parseInt(String(styles?.fontSize), 10) * (1 - 0.1)
                   ).toFixed(0)
                 ) + 'px'
               : '17px'
@@ -182,8 +182,8 @@ const TextEffect: FC<Props> = ({
             notDisplayCaretAfterFinishes && finish ? 'none' : 'inline-block',
           opacity: opacity,
         }}
-      ></div>
-    </div>
+      ></span>
+    </>
   );
 };
 
