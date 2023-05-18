@@ -136,20 +136,36 @@ const TextEffect: FC<Props> = ({
 
   return (
     <div>
-      <span className={textClassName} style={{ ...styles }}>
+      <span style={{ ...styles }} className={textClassName}>
         {displayText}
       </span>
-      <span
+      <div
         style={{
-          width: '10px',
-          height: '17px',
+          width: `${
+            styles?.fontSize
+              ? Number(
+                  Number(parseInt(String(styles?.fontSize), 10) / 5).toFixed(0)
+                ) + 'px'
+              : '10px'
+          }`,
+          height: `${
+            styles?.fontSize
+              ? Number(
+                  Number(
+                    parseInt(String(styles?.fontSize), 10) -
+                      parseInt(String(styles?.fontSize), 10) / 3
+                  ).toFixed(0)
+                ) + 'px'
+              : '17px'
+            // parseInt(String(styles?.fontSize), 10) - 5 + "px" || "16px"
+          }`,
           background: caretBackground,
           transform: 'translateY(3px)',
           display:
             notDisplayCaretAfterFinishes && finish ? 'none' : 'inline-block',
           opacity: opacity,
         }}
-      ></span>
+      ></div>
     </div>
   );
 };

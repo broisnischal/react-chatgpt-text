@@ -66,10 +66,20 @@
     "url": "https://github.com/neeswebservices/react-chatgpt-text.git"
   },
   "keywords": [
+    "type",
+    "typing-effect",
+    "chatgpt-typing-effect",
+    "react-type-effect",
+    "text-effect",
+    "chatgpt",
+    "text",
+    "typing",
+    "effect",
     "react-text",
     "chatgpt-text",
     "text-effect",
-    "typing effect"
+    "typing effect",
+    "gpt-typing"
   ],
   "bugs": {
     "url": "https://github.com/neeswebservices/react-chatgpt-text/issues"
