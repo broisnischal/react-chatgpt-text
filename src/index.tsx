@@ -12,11 +12,21 @@ interface Props {
   notDisplayCaretAfterFinishes?: boolean;
 }
 
+/**
+ * Gives the ChatGPT like typing effect,
+ * typewriter, Pass all values in milliseconds!
+
+ * @param {string} text - Text to pass
+ * @param {number} thinkingDelay - Thinking time delay - default is 4000ms
+ * @param {number} minTypingDelay - Minimum typing speed delay - default is 50ms
+ * @param {number} maxTypingDelay - Maximum typing speed delay - default is 250ms
+ * @param {number} cursorBlinkSpeed - Cursor blink speed - default is 250ms
+ */
 const TextEffect: FC<Props> = ({
   text,
-  thinkingDelay = 2000,
+  thinkingDelay = 4000,
   minTypingDelay = 50,
-  maxTypingDelay = 400,
+  maxTypingDelay = 250,
   textClassName,
   styles,
   caretBackground = '#333',

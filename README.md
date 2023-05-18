@@ -6,7 +6,9 @@
 
 > Add the typing effect like the AI type in the website of the ChatGPT. A typewriter, which generates the type effect like the ChatGPT website's like AI typing, with thinking. Here are lots of features that you can use, ie. thinking delay, typing delay, minimum typing delay, maximum typing delay.
 
-### 🏠 [Homepage](https://github.com/neeswebservices/react-chatgpt-text#readme)
+> All the value you pass should be in Millisecond, you can download the extension : 👉 [Milliseconds](https://marketplace.visualstudio.com/items?itemName=NischalDahalMilliseconds.milliseconds)
+
+<!-- ### 🏠 [Homepage](https://github.com/neeswebservices/react-chatgpt-text#readme) -->
 
 ## Installl
 
@@ -28,6 +30,8 @@ yarn add gpt-type-effect
 Example
 ![Props](https://res.cloudinary.com/dacp0r5b7/image/upload/v1684305939/Screenshot_10_hg9yj9.png)
 
+<br>
+
 ### Configuration Settings
 
 #### `minTypeDelay`
@@ -47,6 +51,10 @@ Example
 - The `thinkingDelay` setting defines the delay introduced when simulating a pause or "thinking" state during user input emulation.
 - Specify a value in milliseconds to set the duration of the "thinking" pause.
 - This pause simulates the moments when the user pauses to think before typing the next input.
+
+<br>
+
+# Checkout 👉 [Milliseconds](https://marketplace.visualstudio.com/items?itemName=NischalDahalMilliseconds.milliseconds)
 
 ## Author
 
