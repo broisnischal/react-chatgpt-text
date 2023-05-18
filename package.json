@@ -79,7 +79,14 @@
     "chatgpt-text",
     "text-effect",
     "typing effect",
-    "gpt-typing"
+    "gpt-typing",
+    "chat",
+    "gpt",
+    "type",
+    "react-typing-effect",
+    "text-effect",
+    "typewriter",
+    "animator"
   ],
   "bugs": {
     "url": "https://github.com/neeswebservices/react-chatgpt-text/issues"
