@@ -86,7 +86,8 @@
     "react-typing-effect",
     "text-effect",
     "typewriter",
-    "animator"
+    "animator",
+    "gpt4 text effect"
   ],
   "bugs": {
     "url": "https://github.com/neeswebservices/react-chatgpt-text/issues"
