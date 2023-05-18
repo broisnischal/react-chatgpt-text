@@ -1,0 +1,3 @@
+- Change the second mistake in cursorspeed
+- slowly blinks when typing and defaults when finishes
+- more to add...
